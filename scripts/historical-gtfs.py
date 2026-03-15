@@ -50,6 +50,6 @@ if __name__ == "__main__":
     api_key = os.environ["GTFS_TOKEN"]
     operator_id = "CT"
     period_start = datetime(2020, 1, 1)
-    period_end = datetime(2026, 2, 28)
+    period_end = datetime(2025, 12, 31)
     output_dir = "data/gtfs"
     get_datafeeds(api_key, operator_id, period_start, period_end, output_dir)
