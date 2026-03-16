@@ -57,7 +57,7 @@ def weather_csv():
                         row = {
                             "timestamp": (
                                 hour_t + timedelta(minutes=minute)
-                            ).isoformat()
+                            ).strftime("%Y-%m-%dT%H:%M")
                         }
                         row.update(values)
                         writer.writerow(row)
