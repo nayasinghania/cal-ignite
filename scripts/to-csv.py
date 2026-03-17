@@ -2,10 +2,10 @@ import csv
 import json
 from datetime import datetime, timedelta, timezone
 
-start_year = 2020
-end_year = 2025
-start_month = 1
-end_month = 12
+start_year = 2025
+end_year = 2026
+start_month = 3
+end_month = 2
 
 HOURLY_FIELDS = [
     "temperature_2m: temperature",
@@ -32,13 +32,16 @@ CSV_COLUMNS = [csv_name for _, csv_name in HOURLY_FIELD_PAIRS]
 
 
 def weather_csv():
-    with open("./data/data.csv", "w", newline="") as out:
+    print("hello")
+    with open("./data.csv", "w", newline="") as out:
         writer = csv.DictWriter(out, fieldnames=["timestamp"] + CSV_COLUMNS)
         writer.writeheader()
         for y in range(start_year, end_year + 1):
-            for m in range(start_month, end_month + 1):
+            m_start = start_month if y == start_year else 1
+            m_end = end_month if y == end_year else 12
+            for m in range(m_start, m_end + 1):
                 try:
-                    with open(f"./data/weather/weather_{y}-{m}.json") as f:
+                    with open(f"./data/weather/weather_{y}-{m:02d}.json") as f:
                         data = json.load(f)
                 except FileNotFoundError:
                     continue
@@ -55,9 +58,9 @@ def weather_csv():
                         values[csv_name] = "" if v != v else "{:.3f}".format(v)
                     for minute in range(60):
                         row = {
-                            "timestamp": (
-                                hour_t + timedelta(minutes=minute)
-                            ).strftime("%Y-%m-%dT%H:%M")
+                            "timestamp": (hour_t + timedelta(minutes=minute)).strftime(
+                                "%Y-%m-%dT%H:%M"
+                            )
                         }
                         row.update(values)
                         writer.writerow(row)
