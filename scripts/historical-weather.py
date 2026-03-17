@@ -92,8 +92,8 @@ if __name__ == "__main__":
 
     latitude = 37.4419
     longitude = -122.143
-    start_date = datetime(2020, 1, 1)
-    end_date = datetime(2025, 12, 31)
+    start_date = datetime(2025, 3, 1)
+    end_date = datetime(2026, 2, 28)
     output_dir = "data/weather"
 
     get_weather(openmeteo, latitude, longitude, start_date, end_date, output_dir)
