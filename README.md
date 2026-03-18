@@ -33,5 +33,4 @@ curl -X POST "http://localhost:8000/predict" \
     "day": 1,
     "month": 3
   }'
-
 ```
